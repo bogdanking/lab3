@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class ForgetPasswd
+public class PaymentMethod
 {
     private WebDriver driver;
     private String url;
@@ -28,35 +28,33 @@ public class ForgetPasswd
     @Before
     public void setUp() throws Exception
     {
-        url ="https://www.lamoda.ru/";
+         url ="https://www.lamoda.ru/";
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void PaymentMethod(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+        driver.findElement(By.xpath("/html/body/div[8]/div[2]/div[3]/div[2]/a")).click();
+        assertEquals("Как оплатить заказ?", driver.findElement(By.xpath("//h1")).getText());
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void NewAccountFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        PaymentMethod(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void NewAccountChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        PaymentMethod(new ChromeDriver());
     }
 
     @After

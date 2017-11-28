@@ -8,15 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.util.concurrent.TimeUnit;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.assertEquals;
-
-public class ForgetPasswd
+public class Novelties
 {
     private WebDriver driver;
     private String url;
+    private boolean a;
 
     @BeforeClass
     public static void init()
@@ -32,31 +31,44 @@ public class ForgetPasswd
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void Novelties(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
+        driver.findElement(By.xpath("//*[@id=\"menu-wrapper\"]/div/div[2]/div[1]/a")).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+
+        try
+
+        {
+            driver.get("https://www.lamoda.ru/c/4153/default-women/?is_new=1&is_sale=0&is_crossborder=0&sitelink=topmenuW&l=1");
+            a = true;
+
+        }
+        catch (Exception e)
+        {
+            System.err.print("Error");
+            a = false;
+        }
+
+        assertTrue(a);
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void NoveltiesFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        Novelties(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void NoveltiesChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        Novelties(new ChromeDriver());
     }
 
     @After

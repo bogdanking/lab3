@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class ForgetPasswd
+public class Sort
 {
     private WebDriver driver;
     private String url;
@@ -28,35 +28,34 @@ public class ForgetPasswd
     @Before
     public void setUp() throws Exception
     {
-        url ="https://www.lamoda.ru/";
+        url ="https://www.lamoda.ru/c/4153/default-women/?is_new=1&sort=default";
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void Sort(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+        driver.findElement(By.xpath("/html/body/div[3]/div[5]/div/div[2]/div[2]/div/div/div[1]/div/span/span/span")).click();
+        driver.findElement(By.xpath("/html/body/div[3]/div[5]/div/div[2]/div[2]/div/div/div[1]/div/span/span/ul/li[2]/span")).click();
+        assertEquals("по возрастанию цены", driver.findElement(By.xpath("/html/body/div[3]/div[5]/div/div[2]/div[2]/div/div/div[1]/div/span/span/span")).getText());
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void SortFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        Sort(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void SortChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        Sort(new ChromeDriver());
     }
 
     @After

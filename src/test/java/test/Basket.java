@@ -8,12 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.assertEquals;
 
-public class NewAccount
+public class Basket
 {
     private WebDriver driver;
     private String url;
@@ -28,36 +26,33 @@ public class NewAccount
     @Before
     public void setUp() throws Exception
     {
-        url = "https://accounts.google.com/signin";
+        url = "https://www.lamoda.ru/";
     }
 
 
-    private void NewAccount(WebDriver webDriver) throws Exception
+    private void Basket(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("//*[@class = \"IMH1vc lUHSR Hj2jlf\"]")).click();
+        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/a[2]")).click();
         Thread.sleep(2000);
-        driver.get("https://accounts.google.com/SignUpExpress?service=analytics&continue=https%3A%2F%2Fanalytics.google.com%2Fanalytics%2Fweb%2F%23&hl=ru");
-        Thread.sleep(3000);
-        assertEquals("Зарегистрируйтесь в Google", driver.findElement(By.xpath("//h1")).getText());
-    }
-
-
-
-    @Test
-    public void NewAccountFirefox() throws Exception
-    {
-        NewAccount(new FirefoxDriver());
+        assertEquals("В корзину ничего не добавлено", driver.findElement(By.xpath("//h2")).getText());
     }
 
 
     @Test
-    public void NewAccountChrome() throws Exception
+    public void BasketFirefox() throws Exception
+    {
+        Basket(new FirefoxDriver());
+    }
+
+
+    @Test
+    public void BasketChrome() throws Exception
 
     {
-        NewAccount(new ChromeDriver());
+        Basket(new ChromeDriver());
     }
 
     @After

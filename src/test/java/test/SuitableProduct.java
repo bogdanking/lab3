@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class ForgetPasswd
+public class SuitableProduct
 {
     private WebDriver driver;
     private String url;
@@ -28,35 +29,36 @@ public class ForgetPasswd
     @Before
     public void setUp() throws Exception
     {
-        url ="https://www.lamoda.ru/";
+        url ="https://www.lamoda.ru/c/4153/default-women/?is_sale=1&display_locations=outlet&sitelink=topmenuW&l=10";
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void SuitableProduct(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+        Actions builder = new Actions(driver);
+        builder.moveToElement(driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div/div[3]/div[1]")));
+        driver.findElement(By.xpath("/html/body/div[8]/div[1]/div/form/button[2]"));
+        driver.navigate().to("https://www.lamoda.ru/help/article/snachala-primerte-potom-kupite-ru/");
+        assertEquals("Сначала примерьте — потом купите", driver.findElement(By.xpath("/html/body/div[3]/div[3]/section/div[2]/article/h1")).getText());
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void SuitableProductFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        SuitableProduct(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void SuitableProductChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        SuitableProduct(new ChromeDriver());
     }
 
     @After

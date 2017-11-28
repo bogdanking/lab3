@@ -13,49 +13,48 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class Identifier {
-    public WebDriver driver;
-    public String url;
+public class Sales
+{
+    private WebDriver driver;
+    private String url;
 
     @BeforeClass
-    public static void init() 
-	{
+    public static void init()
+    {
         System.setProperty("webdriver.gecko.driver", "C:/WebDrivers/geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:/WebDrivers/chromedriver.exe");
     }
 
     @Before
-    public void setUp() throws Exception 
-	{
-        url = "https://accounts.google.com/signin";
+    public void setUp() throws Exception
+    {
+        url ="https://www.lamoda.ru/";
     }
 
 
-    private void Identifier(WebDriver webDriver) throws Exception {
+    private void Sales(WebDriver webDriver) throws Exception
+    {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("//*[@class = \"whsOnd zHQkBf\"]"));
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//*[@class =\"RveJvd snByac\"]")).click();
-        Thread.sleep(2000);
-        assertEquals("Введите адрес электронной почты или номер телефона", driver.findElement(By.xpath("//*[@jsname = \"B34EJ\"]")).getText());
+        driver.findElement(By.xpath("//*[@id=\"menu-wrapper\"]/div/div[2]/div[10]/a")).click();
+        assertEquals("Товары со скидкой", driver.findElement(By.xpath("/html/body/div[3]/div[5]/div/div[2]/div[2]/div/div[2]/div/div/div[10]/div/span/span[1]")).getText());
     }
 
 
 
     @Test
-    public void IdentifierFirefox() throws Exception
+    public void SalesFirefox() throws Exception
     {
-        Identifier(new FirefoxDriver());
+        Sales(new FirefoxDriver());
     }
 
 
     @Test
-    public void IdentifierChrome() throws Exception
+    public void SalesChrome() throws Exception
 
     {
-        Identifier(new ChromeDriver());
+        Sales(new ChromeDriver());
     }
 
     @After

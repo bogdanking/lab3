@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class ForgetPasswd
+public class Search
 {
     private WebDriver driver;
     private String url;
@@ -32,31 +32,30 @@ public class ForgetPasswd
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void Search(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+        driver.findElement(By.xpath("//*[@id=\"menu-wrapper\"]/div/div[1]/input")).sendKeys("etew");
+        driver.findElement(By.xpath("//*[@id=\"menu-wrapper\"]/div/div[1]/div[2]/div")).click();
+        assertEquals("Товары по запросу «etew»", driver.findElement(By.xpath("/html/body/div[3]/div[5]/div[1]/h2")).getText());
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void SearchFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        Search(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void SearchChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        Search(new ChromeDriver());
     }
 
     @After

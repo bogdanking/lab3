@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class ForgetPasswd
+public class Help
 {
     private WebDriver driver;
     private String url;
@@ -32,31 +32,29 @@ public class ForgetPasswd
     }
 
 
-    private void ForgetPasswd(WebDriver webDriver) throws Exception
+    private void Help(WebDriver webDriver) throws Exception
     {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[3]/div/span")).click();
-        assertEquals("Восстановление пароля", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[3]/div[2]")).getText());
+        driver.findElement(By.xpath("/html/body/div[8]/div[2]/div[1]/div[4]/a")).click();
+        assertEquals("Как оформить заказ? Пошаговая инструкция", driver.findElement(By.xpath("/html/body/div[1]/div/section[1]/div/h1")).getText());
     }
 
 
 
     @Test
-    public void ForgetPasswdFirefox() throws Exception
+    public void HelpFirefox() throws Exception
     {
-        ForgetPasswd(new FirefoxDriver());
+        Help(new FirefoxDriver());
     }
 
 
     @Test
-    public void ForgetPasswdChrome() throws Exception
+    public void HelpChrome() throws Exception
 
     {
-        ForgetPasswd(new ChromeDriver());
+        Help(new ChromeDriver());
     }
 
     @After

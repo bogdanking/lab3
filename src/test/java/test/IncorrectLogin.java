@@ -8,55 +8,54 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class WrongLogin
-{
-    private WebDriver driver;
-    private String url;
+public class IncorrectLogin {
+    public WebDriver driver;
+    public String url;
 
     @BeforeClass
-    public static void init()
-    {
+    public static void init() 
+	{
         System.setProperty("webdriver.gecko.driver", "C:/WebDrivers/geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:/WebDrivers/chromedriver.exe");
     }
 
     @Before
-    public void setUp() throws Exception
-    {
-        url = "https://accounts.google.com/signin";
+    public void setUp() throws Exception 
+	{
+        url = "https://www.lamoda.ru/";
     }
 
 
-    private void WrongLogin(WebDriver webDriver) throws Exception
-    {
+    private void IncorrectLogin(WebDriver webDriver) throws Exception {
         driver = webDriver;
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(url);
-        driver.findElement(By.xpath("//*[@class = \"whsOnd zHQkBf\"]")).sendKeys("xoasfhoasy");
+        driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/span[1]")).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//*[@class =\"RveJvd snByac\"]")).click();
+        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[2]/div/input")).sendKeys("...");
         Thread.sleep(2000);
-        assertEquals("Не удалось найти аккаунт Google", driver.findElement(By.xpath("//*[@class = \"dEOOab RxsGPe\"]")).getText());
+        assertEquals("Пожалуйста, введите действительный адрес электронной почты. Например, johndoe@domain.com", driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form[1]/div[2]/div/div[2]")).getText());
     }
 
 
 
     @Test
-    public void WrongLoginFirefox() throws Exception
+    public void IncorrectLoginFirefox() throws Exception
     {
-        WrongLogin(new FirefoxDriver());
+        IncorrectLogin(new FirefoxDriver());
     }
 
 
     @Test
-    public void WrongLoginChrome() throws Exception
+    public void IncorrectLoginChrome() throws Exception
 
     {
-        WrongLogin(new ChromeDriver());
+        IncorrectLogin(new ChromeDriver());
     }
 
     @After
